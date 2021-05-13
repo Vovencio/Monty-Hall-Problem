@@ -93,9 +93,9 @@ if __name__ == '__main__':
     rem = 0
 
     print(spaces)
-    print('Preparing...')
-    print(spaces)
     for x in range(0,count):
+        perc = math.floor(x/count*100000)/1000
+        print("%s" %perc + "%" + ' Preparing' + '.'*(x%3+1))
         sresult.append('')
         cresult.append('')
 
