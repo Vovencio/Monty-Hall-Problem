@@ -91,14 +91,13 @@ if __name__ == '__main__':
     # Time measurment
     starttime = time.time()
     rem = 0
-
-    print(spaces)
-    for x in range(0,count):
-        perc = math.floor(x/count*100000)/1000
-        print("%s" %perc + "%" + ' Preparing' + '.'*(x%3+1))
+def Preparate(first, sec, t):
+    for x in range(first,sec):
+        perc = math.floor(x/count*100000*12)/1000
+        if (t==0):
+            print("%s" %perc + "%" + ' Preparing' + '.'*(x%3+1))
         sresult.append('')
         cresult.append('')
-
 def Rechnen(nm,nm2,tr):
     global cwincount
     global swincount
@@ -148,6 +147,32 @@ def Rechnen(nm,nm2,tr):
         print(spaces)
         lead +=1
 if __name__ == '__main__':
+    p0 = Process(target=Preparate(0,math.floor(count/12),0), args=(0,0,0,))
+    p1 = Process(target=Preparate(math.floor(count/12),math.floor(count/12)*2,1), args=(0,0,0,))
+    p2 = Process(target=Preparate(math.floor(count/12)*2,math.floor(count/12)*3,2), args=(0,0,0,))
+    p3 = Process(target=Preparate(math.floor(count/12)*3,math.floor(count/12)*4,3), args=(0,0,0,))
+    p4 = Process(target=Preparate(math.floor(count/12)*4,math.floor(count/12)*5,4), args=(0,0,0,))
+    p5 = Process(target=Preparate(math.floor(count/12)*5,math.floor(count/12)*6,5), args=(0,0,0,))
+    p6 = Process(target=Preparate(math.floor(count/12)*6,math.floor(count/12)*7,6), args=(0,0,0,))
+    p7 = Process(target=Preparate(math.floor(count/12)*7,math.floor(count/12)*8,7), args=(0,0,0,))
+    p8 = Process(target=Preparate(math.floor(count/12)*8,math.floor(count/12)*9,8), args=(0,0,0,))
+    p9 = Process(target=Preparate(math.floor(count/12)*9,math.floor(count/12)*10,9), args=(0,0,0,))
+    p10 = Process(target=Preparate(math.floor(count/12)*10,math.floor(count/12)*11,10), args=(0,0,0,))
+    p11 = Process(target=Preparate(math.floor(count/12)*11,count,11), args=(0,0,0,))
+    p0.start()
+    p1.start()
+    p2.start()
+    p3.start()
+    p4.start()
+    p5.start()
+    p6.start()
+    p7.start()
+    p8.start()
+    p9.start()
+    p10.start()
+    p11.start()
+
+
     p0 = Process(target=Rechnen(0,math.floor(count/12),0), args=(0,0,0,))
     p1 = Process(target=Rechnen(math.floor(count/12),math.floor(count/12)*2,1), args=(0,0,0,))
     p2 = Process(target=Rechnen(math.floor(count/12)*2,math.floor(count/12)*3,2), args=(0,0,0,))
