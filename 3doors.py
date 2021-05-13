@@ -11,8 +11,8 @@ cresult = '\nChange Results \n\n'
 # Spaces
 spaces = '-------------------------------'
 # Greetings
-print('Hello and welcome to the three door choosing simulation made by Vovencio!')
-print('This simulation simulates the three door quiz.')
+print('Hello and welcome to the Monty Hall simulation made by Vovencio!')
+print('This simulation simulates the Monty Hall problem.')
 print(spaces)
 print('If you want to simulate, write:"start" and press enter')
 print('Otherwise, if you want more info, write "info"')
@@ -41,7 +41,7 @@ def choose():
     a = input('What are we going to do next, capitan? ')
     if a == 'info':
         print(spaces)
-        print('The three door Quiz is a quiz show, you were invited to.')
+        print('The Monty Hall is a quiz show, you were invited to.')
         print('In front of you are three identical doors but only behind')
         print('one of them lie $1000000.')
         print('')
