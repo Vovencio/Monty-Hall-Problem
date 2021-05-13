@@ -5,8 +5,8 @@ import time
 # Win counts and results
 swincount = 0
 cwincount = 0
-sresult = '\nStay Results: \n\n'
-cresult = '\nChange Results \n\n'
+sresult = ['\nStay Results: \n\n']
+cresult = ['\nChange Results \n\n']
 
 # Spaces
 spaces = '-------------------------------'
@@ -41,7 +41,7 @@ def choose():
     a = input('What are we going to do next, capitan? ')
     if a == 'info':
         print(spaces)
-        print('The Monty Hall problem is about a quiz show, you were invited to.')
+        print('The Monty Hall is a quiz show, you were invited to.')
         print('In front of you are three identical doors but only behind')
         print('one of them lie $1000000.')
         print('')
@@ -99,37 +99,36 @@ for x in range(0,count):
     hours = math.floor(rem / 3600)
     minutes = math.floor(((rem / 3600) - hours)*60)
     secs = math.floor(((((rem / 3600) - hours)*60-minutes)*60)*100)/100
+
     perc = math.floor(x/count*100000)/1000
     if x % 5 == 0:
-        print('%s '%perc +"%" +' completed, estimated time: %s hours' %hours + ', minutes %s' %minutes + ', seconds %s' %secs)
+        print('%s'%perc +"%" +' completed, estimated time: %s hours' %hours + ', minutes %s' %minutes + ', seconds %s' %secs)
 
     doors = [0,0,0]
     first = random.randint(0,2)
     doors[first] = 1
     selected = random.randint(0,2)
-    if son ==1:
-        sresult = sresult + '\nTest %s,' %x + 'treasure %s,' %first + 'selected/opened %s, ' %selected
 
     if doors[selected] == 1:
         swincount +=1
-        sresult = sresult + 'won'
+        if son == 1:
+            sresult.append('\nTest %s,' % x + 'treasure %s,' % first + 'selected/opened %s, ' % selected + 'won')
     else:
-        sresult = sresult + 'lost'
+        if son == 1:
+            sresult.append('\nTest %s,' % x + 'treasure %s,' % first + 'selected/opened %s, ' % selected + 'lost')
 
     doors = [0,0,0]
 
     first = random.randint(0,2)
     doors[first] = 1
     selected = random.randint(0,2)
-    if son ==1:
-        cresult = cresult + '\nTest %s,' % x + 'treasure %s,' % first + 'selected %s, ' % selected
     if doors[selected] == 0:
         cwincount +=1
         if son == 1:
-            cresult = cresult + 'won'
+            cresult.append('\nTest %s,' % x + 'treasure %s,' % first + 'selected %s, ' % selected + 'won')
     else:
         if son == 1:
-            cresult = cresult + 'lost'
+            cresult.append('\nTest %s,' % x + 'treasure %s,' % first + 'selected %s, ' % selected + 'lost')
 dotime = math.floor((time.time()-starttime)*100)/100
 print(spaces)
 print(spaces)
@@ -145,6 +144,8 @@ print('If you changed the door, you would have %s wins out of the total ' %cwinc
 cwinperc = math.floor(cwincount/count*10000)/100
 print('Which is %s' %cwinperc + '% win chance!')
 
+print(spaces)
+
 if son != 0:
     ss = spaces + '\n'
     towrite = ss + 'Complete in %s seconds!\n' %dotime + ss + 'If you stayed, you would have %s wins out of the total ' %swincount + '%s tries \n' %count + ss + 'Which is %s' %swinperc + '% win chance! \n' + ss + 'If you changed the door, you would have %s wins out of the total ' %cwincount + '%s tries \n' %count + ss + 'Which is %s' %cwinperc + '% win chance!\n'
@@ -153,5 +154,18 @@ if son != 0:
     if son == 2:
         file.write(towrite)
     if son == 1:
-        file.write(towrite + '\n\n\n\n' + sresult + '\n\n\n\n' + cresult)
+        savingperc = 0
+        sstr = ''
+        cstr = ''
+        for x in range(0,len(sresult)):
+            sstr = sstr +sresult[x]
+            if x % 10 == 0:
+                savingperc = math.floor(x/(count*2+2) *10000)/100
+                print('Saving... %s' %savingperc + '%')
+        for x in range(0,len(cresult)):
+            cstr = cstr +cresult[x]
+            if x % 10 == 0:
+                savingperc = math.floor(x/(count+1) *10000/100)/2+50
+                print('Saving... %s' %savingperc + '%')
+        file.write(towrite + '\n\n\n\n\n' + sstr + '\n\n\n\n\n' + cstr)
 input('Exit ')
