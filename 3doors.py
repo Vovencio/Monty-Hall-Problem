@@ -41,7 +41,7 @@ def choose():
     a = input('What are we going to do next, capitan? ')
     if a == 'info':
         print(spaces)
-        print('The Monty Hall is a quiz show, you were invited to.')
+        print('The Monty Hall problem is about a quiz show, you were invited to.')
         print('In front of you are three identical doors but only behind')
         print('one of them lie $1000000.')
         print('')
